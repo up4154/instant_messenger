@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "773729102740",
+    "firebase_url": "https://messenger-app-f0b1f-default-rtdb.firebaseio.com",
+    "project_id": "messenger-app-f0b1f",
+    "storage_bucket": "messenger-app-f0b1f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:773729102740:android:532c50428a55f012a87d81",
+        "android_client_info": {
+          "package_name": "up.instant_messenger"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "773729102740-cqv6bct11o2nirr30jkcglh2gb5s9j89.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBd274oWWFGOTYP4U1ZZtLbw2rd5dxT6mg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "773729102740-cqv6bct11o2nirr30jkcglh2gb5s9j89.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
