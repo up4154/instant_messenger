@@ -47,7 +47,7 @@ class _HomeState extends State<Home> {
     return StreamBuilder(
       stream: chatRoomsStream ,
         builder: (context,snapshot){
-        return snapshot.hasData ? ListView.builder(
+        return snapshot.hasData  ? ListView.builder(
           itemCount: snapshot.data.docs.length,
             shrinkWrap: true,
             itemBuilder: (context,index){
@@ -156,62 +156,64 @@ class _HomeState extends State<Home> {
             child: Icon(Icons.exit_to_app)),
       )],
       ),
-      body: Container(
-        margin: EdgeInsets.symmetric(horizontal: 20.0),
-        child: Column(
-          children: [
-            Row(
-              children: [
-               isSearching ? GestureDetector(
-                 onTap: (){
-                   isSearching = false;
-                   searchUsernameEditingController.text="";
-                   setState(() {
+      body: SingleChildScrollView(
+        child: Container(
+          margin: EdgeInsets.symmetric(horizontal: 20.0),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                 isSearching ? GestureDetector(
+                   onTap: (){
+                     isSearching = false;
+                     searchUsernameEditingController.text="";
+                     setState(() {
 
-                   });
-                 },
-                 child: Padding(
-                    padding:  EdgeInsets.only(right: 12.0),
-                    child: Icon(Icons.arrow_back),
-                  ),
-               ): Container(),
+                     });
+                   },
+                   child: Padding(
+                      padding:  EdgeInsets.only(right: 12.0),
+                      child: Icon(Icons.arrow_back),
+                    ),
+                 ): Container(),
 
-                Expanded(
-                  child: Container(
-                    margin: EdgeInsets.symmetric(vertical: 16.0),
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                          color: Colors.grey,
-                          width: 1.0,
-                        style: BorderStyle.solid,
+                  Expanded(
+                    child: Container(
+                      margin: EdgeInsets.symmetric(vertical: 16.0),
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                            color: Colors.grey,
+                            width: 1.0,
+                          style: BorderStyle.solid,
 
+                        ),
+                            borderRadius: BorderRadius.circular(24),
                       ),
-                          borderRadius: BorderRadius.circular(24),
-                    ),
-                    child: Row(
-                      children: [
-                        Expanded(child: TextField(
-                          controller: searchUsernameEditingController,
-                          decoration: InputDecoration(border: InputBorder.none,
-                          hintText: "search for people",),
-                        )),
-                        GestureDetector(
-                          onTap: (){
-                            if(searchUsernameEditingController.text != ""){
-                                 onSearchBtnClick();
-                            }
-                          },
-                            child: Icon(Icons.search)
-                        )
-                      ],
+                      child: Row(
+                        children: [
+                          Expanded(child: TextField(
+                            controller: searchUsernameEditingController,
+                            decoration: InputDecoration(border: InputBorder.none,
+                            hintText: "search for people",),
+                          )),
+                          GestureDetector(
+                            onTap: (){
+                              if(searchUsernameEditingController.text != ""){
+                                   onSearchBtnClick();
+                              }
+                            },
+                              child: Icon(Icons.search)
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
-           isSearching ? searchUsersList() : chatRoomsList()
-          ],
+                ],
+              ),
+             isSearching ? searchUsersList() : chatRoomsList()
+            ],
+          ),
         ),
       ),
 
@@ -231,6 +233,7 @@ class _ChatRoomListTileState extends State<ChatRoomListTile> {
   String profilePicUrl,name,username;
 
   getThisUserInfo() async{
+
     username = widget.chatRoomId.replaceAll(widget.myUserName, "").replaceAll("_", "");
     QuerySnapshot querySnapshot = await DatabaseMethods().getUserInfo(username);
     print(
@@ -259,9 +262,9 @@ class _ChatRoomListTileState extends State<ChatRoomListTile> {
       },
       child: Row(
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(40),
-              child: Image.network(profilePicUrl,height: 40,width: 40,)),
+          CircleAvatar(
+              backgroundImage: NetworkImage(profilePicUrl)
+          ),
           SizedBox(height: 20,width: 20),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
